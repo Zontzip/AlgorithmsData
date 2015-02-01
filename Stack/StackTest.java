@@ -23,14 +23,14 @@ class Stack {
 
     // only to be called if list is non-empty.
     // Otherwise an exception should be thrown.
-   /* public int pop(){
-        do yourself 
-        
-    } */
+    public int pop() {
+    	int x = top.data;
+    	top = top.next;
+    	return x;    
+    } 
 
-    /*
-    public boolean isEmpty(){
-       do yourself
+    /*public boolean isEmpty() {
+    	
     }*/
 
 
@@ -48,6 +48,19 @@ class Stack {
         System.out.println("\n");
     }
 
+    public void isMember(int x) {
+    	Node t = top;
+
+    	while (t != null) {
+    		if (t.data == x) {
+    			System.out.println(t.data + " is a memeber of the stack");
+    			break;
+    		} else {
+    			t = t.next;
+    		}
+    	}
+    }
+
 }
 
 
@@ -60,12 +73,14 @@ public class StackTest
         
         s.push(10); s.push(3); s.push(11); s.push(7);
         s.display();
+
+        s.isMember(10);
         
-       
-       /* int i = s.pop();
-        System.out.println("Just popped " + i);
-        s.display();
-        */
+        for (int j = 0; j < 4; j++) {
+	        int i = s.pop();
+	        System.out.println("Just popped " + i);
+	        s.display();
+	    }
     }
 }
 
