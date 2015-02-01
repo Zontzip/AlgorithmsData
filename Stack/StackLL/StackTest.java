@@ -48,17 +48,20 @@ class Stack {
         System.out.println("\n");
     }
 
-    public void isMember(int x) {
+    public boolean isMember(int x) {
     	Node t = top;
 
     	while (t != null) {
+
     		if (t.data == x) {
-    			System.out.println(t.data + " is a memeber of the stack");
-    			break;
+    			System.out.println(t.data + " is a memeber of the stack \n");
+    			return true;
     		} else {
     			t = t.next;
     		}
     	}
+
+    	return false;
     }
 
 }
