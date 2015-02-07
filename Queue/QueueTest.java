@@ -12,9 +12,11 @@ class Queue {
     Node head;
     Node tail;
 
-     public Queue() {
-        z = new Node(); z.next = z;
-        head = z;  tail = null;
+    public Queue() {
+        z = new Node(); 
+        z.next = z;
+        head = z;  
+        tail = null;
     }
 
 
@@ -30,7 +32,7 @@ class Queue {
   }
 
 
-  public void enQueue( int x) {
+  public void enQueue(int x) {
     Node temp;
 
     temp = new Node();
@@ -47,9 +49,18 @@ class Queue {
 
 
   // assume the queue is non-empty when this method is called
- /* public int deQueue() {
-   do yourself
-  }*/
+  public int deQueue() {
+    Node temp = head;
+
+    if (head == tail) {
+      tail = null;
+    }
+
+    head = head.next;
+
+    return 0;
+
+  }
 
 
   /*public boolean isEmpty() {
@@ -69,7 +80,7 @@ class QueueTest {
 
     System.out.println("Inserting ints from 9 to 1 into queue gives:\n");
     for (int i = 9; i > 0; --i) {
-       q.enQueue( i);
+       q.enQueue(i);
     }
 
     q.display();
