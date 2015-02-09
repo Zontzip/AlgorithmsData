@@ -3,20 +3,22 @@
 
 class Queue {
 
+	// nested class: nodes are local to the queue
     private class Node {
         int data;
         Node next;
     }
 
-    Node z;
-    Node head;
-    Node tail;
+    Node z; // z is an initial node
+    Node head; // head is a node representing the TOP of the queue
+    Node tail; // tail is a node representing the BOTTOM of the queue
 
+    // constructor initialises nodes
     public Queue() {
         z = new Node(); 
-        z.next = z;
-        head = z;  
-        tail = null;
+        z.next = z; // z.next points to z, which at this time is the only node
+        head = z;  	// head of the queue contains z, which again is the only node at this time
+        tail = null; // tail will always be null (a sentinel) that acts as a terminator
     }
 
 
@@ -33,11 +35,11 @@ class Queue {
 
 
   public void enQueue(int x) {
-    Node temp;
+    Node temp; // temp is our new node
 
     temp = new Node();
-    temp.data = x;
-    temp.next = z;
+    temp.data = x; // our new nodes data attribute holds the number we want to store
+    temp.next = z; // in a queue, the newest member is at the back so next is node is z, the initial node
 
     if(head == z)    // case of empty list
         head = temp;
@@ -50,16 +52,18 @@ class Queue {
 
   // assume the queue is non-empty when this method is called
   public int deQueue() {
-    Node temp = head;
+    int firstItem = head.data;
+          
+	head = head.next;  // The previous second item is now first.
+	if (head == null) {
+		// The queue has become empty.  The Node that was
+		// deleted was the tail as well as the head of the
+		// list, so now there is no tail.  (Actually, the
+		// class would work fine without this step.)
+		tail = null;
+	} 
 
-    if (head == tail) {
-      tail = null;
-    }
-
-    head = head.next;
-
-    return 0;
-
+	return firstItem;
   }
 
 
@@ -82,6 +86,10 @@ class QueueTest {
     for (int i = 9; i > 0; --i) {
        q.enQueue(i);
     }
+
+    q.display();
+
+    q.deQueue();
 
     q.display();
 
