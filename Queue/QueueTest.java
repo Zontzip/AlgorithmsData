@@ -23,7 +23,7 @@ class Queue {
 		System.out.println("\nThe queue values are: ");
 
 		Node temp = head;
-		while(temp != null) {
+		while (temp != null) {
 			System.out.print( temp.data + "  ");
 			temp = temp.next;
 		}
@@ -64,9 +64,23 @@ class Queue {
 		return firstItem;
 	}
 
-
 	public boolean isEmpty() {
 		return (head == tail);
+	}
+
+	public boolean isMember(int x) {
+		Node temp = head;
+
+		while (temp != null) {
+			if (x == temp.data) {
+				System.out.println(x + " was found\n");
+				return true;
+			} else {
+				temp = temp.next;
+			}
+		}
+
+		return false;
 	}
 
 } // end of Queue class
@@ -86,6 +100,8 @@ class QueueTest {
 		}
 
 		q.display();
+
+		q.isMember(5);
 
 		/*for (int i = 9; i > 0; --i) {
 			q.deQueue();
