@@ -9,45 +9,43 @@ class Queue {
 		Node next;
 	}
 
-	Node z; // z is an initial node
-	Node head; // head is a node representing the TOP of the queue
-	Node tail; // tail is a node representing the BOTTOM of the queue
+	Node head = null; // head is a node representing the TOP of the queue
+	Node tail = null; // tail is a node representing the BOTTOM of the queue
 
 	// constructor initialises nodes
 	public Queue() {
-		z = new Node(); 
-		z.next = z; // z.next points to z, which at this time is the only node
-		head = z;  	// head of the queue contains z, which again is the only node at this time
+		head = null;
 		tail = null; // tail will always be null (a sentinel) that acts as a terminator
 	}
 
 
 	public void display() {
-	System.out.println("\nThe queue values are:\n");
+		System.out.println("\nThe queue values are: ");
 
-	Node temp = head;
-	while( temp != temp.next) {
-		System.out.print( temp.data + "  ");
-		temp = temp.next;
-	}
+		Node temp = head;
+		while(temp != null) {
+			System.out.print( temp.data + "  ");
+			temp = temp.next;
+		}
 	
-	System.out.println("\n");
+		System.out.println("\n");
 	}
 
 
 	public void enQueue(int x) {
-	Node temp; // temp is our new node
+		Node newTail = new Node();
 
-	temp = new Node();
-	temp.data = x; // our new nodes data attribute holds the number we want to store
-	temp.next = z; // in a queue, the newest member is at the back so next is node is z, the initial node
+		newTail.data = x;
 
-	if(head == z)    // case of empty list
-		head = temp;
-		else                // case of list not empty
-		tail.next = temp;
-
-		tail = temp;        // new node is now at the tail
+		if (head == null) {
+			head = newTail;
+			tail = newTail;
+		} else {
+                // The new node becomes the new tail of the list.
+                // (The head of the list is unaffected.)
+             tail.next = newTail;
+             tail = newTail;
+		}
 	}
 
 
@@ -82,12 +80,22 @@ class QueueTest {
 
 		Queue q = new Queue();
 
-		System.out.println("Inserting ints from 9 to 1 into queue gives:\n");
+		System.out.println("Inserting ints from 9 to 1 into queue gives...\n");
 		for (int i = 9; i > 0; --i) {
 			q.enQueue(i);
 		}
 
 		q.display();
+
+		/*for (int i = 9; i > 0; --i) {
+			q.deQueue();
+		}
+
+		if (q.isEmpty() == true) {
+			System.out.println("Queue is empty");
+		} else {
+			System.out.println("Well shit, that didn't work...");
+		}
 
 		if( ! q.isEmpty()) {
 			System.out.println("Deleting value from queue: " + q.deQueue() + "\n");
@@ -95,7 +103,7 @@ class QueueTest {
 			System.out.println("Adding value to queue: " + 27 + "\n");
 			q.enQueue(27);
 			q.display();
-		}
+		}*/
 	}
 } //end of Test class
 
