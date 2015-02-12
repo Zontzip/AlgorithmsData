@@ -21,20 +21,17 @@ class Heap
         N = 0;
     }
 
-
     public void insert(int x)
     {
         a[++N] = x;
         siftUp(N);
     }
   
-
     public void siftUp(int k)
     {
         // code this method yourself.
     }
 
-    
     public void display() 
     {
         System.out.println("{0}" + a[1]);
@@ -45,7 +42,6 @@ class Heap
             System.out.println("\n");
         }
     }
-
 }
 
 class heapTest
