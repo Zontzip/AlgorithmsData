@@ -1,7 +1,6 @@
-// Heap.cs
+// Heap.java
 // Simple array based implementation of a Heap;
-
-using System;
+import java.util.*;
 
 class Heap
 {
@@ -38,12 +37,12 @@ class Heap
     
     public void display() 
     {
-        Console.WriteLine("{0}", a[1]);
+        System.out.println("{0}" + a[1]);
 
         for(int i = 1; i <= N/2; i = i * 2) {
             for(int j = 2*i; j < 4*i && j <= N; ++j)
-                Console.Write("{0}  ", a[j]);
-            Console.Write("\n");
+                System.out.println("{0} " + a[j]);
+            System.out.println("\n");
         }
     }
 
@@ -51,7 +50,7 @@ class Heap
 
 class HeapTest
 {
-    static void Main(string[] args)
+    static void Main(String[] args)
     {
         Heap h = new Heap();
 
@@ -61,7 +60,7 @@ class HeapTest
         for (i = 0; i < 10; ++i)
         {
             x = r.Next(99);
-            Console.WriteLine("\nInserting {0} ", x);
+            System.out.println("\nInserting {0} " + x);
             h.insert(x);
             h.display();
         }
@@ -70,7 +69,7 @@ class HeapTest
         //Console.WriteLine("\nRemoving {0} ", x);
        // h.display();
 
-        Console.ReadKey();
+        System.in.read();
        
     }
 }
