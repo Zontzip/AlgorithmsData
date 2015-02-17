@@ -5,7 +5,7 @@ import java.util.*;
 class Heap
 {
     private int[] heap;     // heap is our heap array
-    private int N;          // N is our position in the array
+    private int N;          // N is our global position in the heap array
     private int[] hPos;
 
     private static int hmax = 100;
@@ -24,25 +24,28 @@ class Heap
 
     public void insert(int x)
     {
-        heap[++N] = x;
+        heap[++N] = x; // N is the array position
+        System.out.println("N equals: " + N);
         siftUp(N);
     }
   
     public void siftUp(int k)
     {
-        int v = heap[k];   // v is the vertex, so the current position when sifting through shit
-        heap[0] = Integer.MAX_VALUE;    // sets first element to some super large number
+    	// v is the value we want to put in position. At this time it is a specified position in the array, k.
+        int v = heap[k];
+        heap[0] = Integer.MAX_VALUE;    // sets first element of heap to some unwritable, super large number
 
-        while(v > heap[k/2]) {          // while the current vertex is less than our heap/2
-            heap[k] = heap[k/2];        // replace 
+        // remember, this is a binary tree of numbers
+        while(v > heap[k/2]) {          // while the our number is less than the value stored in heap index/2
+            heap[k] = heap[k/2];        // replace what is in our current position with the smaller number
             //hPos[heap[k]] = k;
-            k = k/2;
+            k = k/2;					// update the position of the array index
+            System.out.println("While loop k: " + k);
+            System.out.println("Value of heap[k]: " + heap[k]);
         }
 
-        heap[k] = v;
+        heap[k] = v; // now we store our number in the correct position
         //hPos[v] = k;
-
-        //System.out.println(hPos[v]);
     }
 
     /*public void siftDown(int k)
