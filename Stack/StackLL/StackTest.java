@@ -5,7 +5,7 @@ class Stack {
     
     class Node {
         int data;
-        Node next;  
+        Node next; // reference [pointer] to next node  
     }
     private Node top;
       
@@ -15,8 +15,8 @@ class Stack {
     }
         
     public void push(int x) {
-        Node  t = new Node();
-        t.data = x;
+        Node t = new Node();
+        t.data = x; // assign value to new node
         t.next = top;
         top = t;
     }
@@ -29,9 +29,15 @@ class Stack {
     	return x;    
     } 
 
-    /*public boolean isEmpty() {
-    	
-    }*/
+    public boolean isEmpty() {
+    	if (top == null) {
+            System.out.println("Empty brah!");
+            return true;
+        } else {
+            System.out.println("Swimming brah!");
+            return false;
+        }
+    }
 
 
     public void display() {
@@ -73,9 +79,13 @@ public class StackTest
         Stack s = new Stack();
         //Console.Write("Stack is created\n");
         System.out.println("Stack is created\n");
+
+        s.isEmpty();
         
         s.push(10); s.push(3); s.push(11); s.push(7);
         s.display();
+
+        s.isEmpty();
 
         s.isMember(10);
         
@@ -84,6 +94,8 @@ public class StackTest
 	        System.out.println("Just popped " + i);
 	        s.display();
 	    }
+
+        s.isEmpty();
     }
 }
 
