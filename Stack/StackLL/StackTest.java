@@ -1,5 +1,9 @@
-// StackTest.java
-// Linked list implementation of Stack
+/* Stack implementation using Linked Lists
+   
+   Name: Alex Kiernan
+
+   Date: 2015-01-23
+*/
 
 class Stack {
     

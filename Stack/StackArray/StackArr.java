@@ -1,3 +1,10 @@
+/* Stack implementation using an array
+   
+   Name: Alex Kiernan
+
+   Date: 2015-01-23
+*/
+
 class Stack {
     private int top;
     int size;

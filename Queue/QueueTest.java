@@ -1,5 +1,9 @@
-// QueueTest.java
-// Allocation of Queue objects in main()
+/* Queue implementation using Linked Lists
+   
+   Name: Alex Kiernan
+
+   Date: 2015-01-30
+*/
 
 class Queue {
 
@@ -18,7 +22,6 @@ class Queue {
 		tail = null; // tail will always be null (a sentinel) that acts as a terminator
 	}
 
-
 	public void display() {
 		System.out.println("\nThe queue values are: ");
 
@@ -30,7 +33,6 @@ class Queue {
 	
 		System.out.println("\n");
 	}
-
 
 	public void enQueue(int x) {
 		Node newTail = new Node();
@@ -47,7 +49,6 @@ class Queue {
              tail = newTail;
 		}
 	}
-
 
 	public int deQueue() {
 		int firstItem = head.data;
@@ -94,7 +95,7 @@ class QueueTest {
 
 		Queue q = new Queue();
 
-		System.out.println("Inserting ints from 9 to 1 into queue gives...\n");
+		System.out.println("Inserting ints from 9 to 1 into queue...\n");
 		for (int i = 9; i > 0; --i) {
 			q.enQueue(i);
 		}

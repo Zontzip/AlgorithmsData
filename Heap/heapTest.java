@@ -1,5 +1,10 @@
-// heapTest.java
-// Simple array based implementation of a Heap;
+/* Heap implementation using an array
+   
+   Name: Alex Kiernan
+
+   Date: 2015-02-13
+*/
+
 import java.util.*;
 
 class Heap
@@ -31,7 +36,7 @@ class Heap
   
     public void siftUp(int k)
     {
-    	// v is the value we want to put in position. At this time it is a specified position in the array, k.
+    	// v is the value we want to put in position. At this time it is a specified position (k) in the array.
         int v = heap[k];
         heap[0] = Integer.MAX_VALUE;    // sets first element of heap to some unwritable, super large number
 
@@ -48,13 +53,13 @@ class Heap
         //hPos[v] = k;
     }
 
-    /*public void siftDown(int k)
+    public void siftDown(int k)
     {
         int v, j;
 
         heap = h[k];
 
-        while( heap<= k/2 ) {// while node at pos k has a left child node 
+        while(heap <= k/2 ) {// while node at pos k has a left child node 
             j = 2k
             if( j < N ∧ h[j] < h[j+1]) ++j
             if( v ≥ h[j] ) break
