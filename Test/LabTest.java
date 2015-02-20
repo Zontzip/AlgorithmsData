@@ -76,7 +76,7 @@ class Stack {
 
     public boolean remove(char x) {
         Node t = top;
-        //Node temp = top;
+        System.out.println("Attempting to remove: " + x);
 
         while (t != null) {
             if (t.next.data == x) { 
