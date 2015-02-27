@@ -62,9 +62,7 @@ class GraphMatrix
             
             System.out.println("Edge " + toChar(u) + "--(" + wgt + ")--" + toChar(v));    
             // write code to put edge into adjacency matrix     
-            // missing code here        
-            adj[u][v] = wgt;
-            adj[v][u] = wgt;    
+            // missing code here            
        }	       
     }
 
@@ -91,29 +89,15 @@ class GraphMatrix
     public void DF( int s) 
     {
         id = 0;
-        for (int v =1; v <= V; ++v) {
-            visited[v] = 0;
-        }
-        dfVisit(0, s);
+        
+        
     }
 
 
     // Recursive Depth First Traversal for adjacency matrix
     private void dfVisit( int prev, int v)
     {
-        visted[v] = ++id;
-        System.out.println("Visited vertex" + toChar[v] + " along edge" + toChar(prev) + "--" + toChar(v));
 
-        for (int u = 1; u <= V; ++u) 
-        {
-            if (adj[v][u] != 0)
-            {
-                if(visited[u] == 0)
-                {
-                    dfVisit(v, u);
-                }
-            }
-        }
     }
 
 
