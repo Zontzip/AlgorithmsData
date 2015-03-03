@@ -1,6 +1,5 @@
 // Simple weighted graph representation 
 // Uses an Adjacency Matrix, suitable for dense graphs
-// Converted from C# some of which has been commented out
 
 import java.io.*;
 
