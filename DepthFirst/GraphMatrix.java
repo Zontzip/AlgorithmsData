@@ -28,7 +28,7 @@ class GraphMatrix
         String splits = "\\s+";  // multiple whitespaces as delimiter		   
 		String line = reader.readLine();    
 		System.out.println(line); 
-		System.out.println("Splits: " + splits);  
+		//System.out.println("Splits: " + splits);  
         String[] parts = line.split(splits);
         System.out.println("Parts[] = " + parts[0] + " " + parts[1]);
 		
@@ -54,8 +54,9 @@ class GraphMatrix
             wgt = Integer.parseInt(parts[2]);
             
             System.out.println("Edge " + toChar(u) + "--(" + wgt + ")--" + toChar(v));    
-            // write code to put edge into adjacency matrix     
-            // missing code here            
+            // edge into adjacency matrix     
+            adj[u][v] = wgt;
+            adj[v][u] = wgt;
     	}	       
     }
 
@@ -67,9 +68,10 @@ class GraphMatrix
     
 	
     // method to display the graph representation
-    public void display() {
+    public void display() 
+    {
         int u,v;
-        
+
         for(v=1; v<=V; ++v) {
             System.out.print("\nadj[" + v + "] = ");
             for(u=1; u<=V; ++u) 
@@ -81,13 +83,28 @@ class GraphMatrix
     // method to initialise Depth First Traversal of Graph
     public void DF( int s) 
     {
-        
+    	int v;
+        int id = 0;
+
+    	for (v = 1; v < V; v++) {
+    		visited[v] = 0;
+    	}
+    	dfVisit(0, s);
     }
 
 	// Recursive Depth First Traversal for adjacency matrix
     private void dfVisit( int prev, int v)
     {
+    	visited[v] = ++id;
+    	System.out.println("Visited vertex: " + v + " along edge: " + prev + " -- " + v);
 
+    	for (int u = 1; u <= V; ++u) {
+            if (adj[v][u] != 0) {
+                if(visited[u] == 0) {
+                    dfVisit(v, u);
+                }
+            }
+        }
     }
 
     public static void main(String[] args) throws IOException
@@ -97,10 +114,10 @@ class GraphMatrix
 
         GraphMatrix g = new GraphMatrix(fname);
        
-        // g.display();
+        g.display();
         
-        // g.DF(s);
-        // g.BF
+        g.DF(s);
+        //g.BF;
     }
 
 }
