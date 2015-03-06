@@ -106,7 +106,7 @@ public class LabTest
         s.push('c'); s.push('d'); s.push('a'); s.push('h');
         s.display();
 
-        s.remove('d');
+        s.remove('h');
         s.display();
 
         /*s.isEmpty();
