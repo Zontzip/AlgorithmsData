@@ -252,15 +252,15 @@ class GraphLists {
 
     public static void main(String[] args) throws IOException
     {
-        int s = 1;
-        String fname = "graph.txt";               
+        int s = 7;
+        String fname = "graph2.txt";               
 
         GraphLists g = new GraphLists(fname);
        
         g.display();
         
-        //g.DF(s);
-        g.BF(s);
+        g.DF(s);
+        //g.BF(s);
     }
 
 }
