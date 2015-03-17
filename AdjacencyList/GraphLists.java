@@ -1,10 +1,92 @@
-// Simple weighted graph representation 
-// Uses an Adjacency Linked Lists, suitable for sparse graphs
-// Uses nodes and Depth First search
-//
-// Name: Alex Kiernan
+/* Simple weighted graph representation that uses an adjacency linked list.
+ * Contains nodes and depth/breadth first search methods.
+ * 
+ * Name: Alex Kiernan
+ *
+ */
 
 import java.io.*;
+
+class Queue {
+
+    // nested class: nodes are local to the queue
+    private class Node {
+        int data;
+        Node next;
+    }
+
+    Node head = null; // head is a node representing the TOP of the queue
+    Node tail = null; // tail is a node representing the BOTTOM of the queue
+
+    // constructor initialises nodes
+    public Queue() {
+        head = null;
+        tail = null; // tail will always be null (a sentinel) that acts as a terminator
+    }
+
+    public void display() {
+        System.out.println("\nThe queue values are: ");
+
+        Node temp = head;
+        while (temp != null) {
+            System.out.print( temp.data + "  ");
+            temp = temp.next;
+        }
+    
+        System.out.println("\n");
+    }
+
+    public void enQueue(int x) {
+        Node t = new Node();
+
+        t.data = x;
+
+        if (head == null) {
+            head = t;
+            tail = t;
+        } else {
+            // The new node becomes the new tail of the list.
+            // (The head of the list is unaffected.)
+             tail.next = t;
+             tail = t;
+        }
+    }
+
+    public int deQueue() {
+        int firstItem = head.data;
+
+        head = head.next;  // The previous second item is now first.
+        if (head == null) {
+            // The queue has become empty.  The Node that was
+            // deleted was the tail as well as the head of the
+            // list, so now there is no tail.  (Actually, the
+            // class would work fine without this step.)
+            tail = null;
+        } 
+
+        return firstItem;
+    }
+
+    public boolean isEmpty() {
+        return (tail == null);
+    }
+
+    public boolean isMember(int x) {
+        Node temp = head;
+
+        while (temp != null) {
+            if (x == temp.data) {
+                System.out.println(x + " was found\n");
+                return true;
+            } else {
+                temp = temp.next;
+            }
+        }
+
+        return false;
+    }
+
+} // end of Queue class
 
 class GraphLists {
     class Node {
@@ -68,9 +150,9 @@ class GraphLists {
             v = Integer.parseInt(parts[1]); 
             wgt = Integer.parseInt(parts[2]);
 
-            Node t = new Node();
-            t.next = adj[u]; // point next node field of new node to the previous node
-            adj[u] = t; // start working with adj, not t! (They are same locations btw)
+            Node t1 = new Node();
+            t1.next = adj[u]; // point next node field of new node to the previous node
+            adj[u] = t1; // start working with adj, not t! (They are same locations btw)
             adj[u].vert = v;
             adj[u].wgt = wgt;
 
@@ -95,10 +177,10 @@ class GraphLists {
         
         for(v=1; v<=V; ++v) {
 
-            System.out.print("\nadj[" + v + "] ->" );
+            System.out.print("\nadj[" + toChar(v) + "] ->" );
 
             for(n = adj[v]; n != sentinel; n = n.next) {
-                System.out.print(" |" + n.vert + " | " + n.wgt + "| ->");    
+                System.out.print(" |" + toChar(n.vert) + " | " + n.wgt + "| ->");    
             }
             System.out.print(" Sentinel");
         }
@@ -133,16 +215,52 @@ class GraphLists {
         }
     }
 
+    public void BF(int s) {
+        Queue q = new Queue();
+        int v;
+        id = 0;
+
+        Node n;
+
+        for (v = 1; v < V; ++v) {
+            visited[v] = 0;
+        }
+
+        q.enQueue(s);
+
+        while(q.isEmpty() == false) {
+            //System.out.println("Entered while loop, v: " + v);
+            q.display();
+            v = q.deQueue();
+            //System.out.println("v after deQueue: " + v);
+
+            if(visited[v] == 0) 
+            {
+                visited[v] = ++id;
+                
+                for (n = adj[v]; n != sentinel; n = n.next) // go to all possible adjacent nodes
+                {
+                    if(visited[n.vert] == 0) { // if node not visited, put on queue
+                        q.enQueue(n.vert);
+                        System.out.println("Breadth First: Visited vertex: " + toChar(n.vert) + 
+                            " along edge: " + toChar(v) + " -- " + toChar(n.vert));
+                    }
+                } // end for 
+            } // end if
+        } // end while
+    }
+
     public static void main(String[] args) throws IOException
     {
-        int s = 7;
+        int s = 1;
         String fname = "graph.txt";               
 
         GraphLists g = new GraphLists(fname);
        
         g.display();
         
-        g.DF(s);
+        //g.DF(s);
+        g.BF(s);
     }
 
 }
