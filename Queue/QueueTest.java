@@ -11,15 +11,16 @@ class Queue {
 	private class Node {
 		int data;
 		Node next;
+		Node prev;
 	}
 
-	Node head = null; // head is a node representing the TOP of the queue
-	Node tail = null; // tail is a node representing the BOTTOM of the queue
+	Node head; // head is a node representing the TOP of the queue
+	Node tail; // tail is a node representing the BOTTOM of the queue
 
 	// constructor initialises nodes
 	public Queue() {
 		head = null;
-		tail = null; // tail will always be null (a sentinel) that acts as a terminator
+		tail = null; 
 	}
 
 	public void display() {
@@ -35,18 +36,18 @@ class Queue {
 	}
 
 	public void enQueue(int x) {
-		Node newTail = new Node();
+		Node t = new Node();
 
-		newTail.data = x;
+		t.data = x;
 
 		if (head == null) {
-			head = newTail;
-			tail = newTail;
+			head = t;
+			tail = t;
 		} else {
-                // The new node becomes the new tail of the list.
-                // (The head of the list is unaffected.)
-             tail.next = newTail;
-             tail = newTail;
+            // The new node becomes the new tail of the list.
+			// (The head of the list is unaffected.)
+             tail.next = t;
+             tail = t;
 		}
 	}
 
@@ -61,12 +62,13 @@ class Queue {
 			// class would work fine without this step.)
 			tail = null;
 		} 
+		System.out.println(firstItem + " was removed");
 
 		return firstItem;
 	}
 
 	public boolean isEmpty() {
-		return (head == tail);
+		return (tail == null);
 	}
 
 	public boolean isMember(int x) {
@@ -86,8 +88,6 @@ class Queue {
 
 } // end of Queue class
 
-
-
 class QueueTest {
 
 	// try out the ADT Queue using static allocation
@@ -104,23 +104,39 @@ class QueueTest {
 
 		q.isMember(5);
 
-		/*for (int i = 9; i > 0; --i) {
+		System.out.println("Queue empty: " + q.isEmpty());
+
+		for (int i = 9; i > 0; --i) {
 			q.deQueue();
 		}
 
+		System.out.println("Queue empty: " + q.isEmpty());
+
 		if (q.isEmpty() == true) {
-			System.out.println("Queue is empty");
+			System.out.println("Queue is empty bro");
 		} else {
 			System.out.println("Well shit, that didn't work...");
 		}
 
-		if( ! q.isEmpty()) {
+		q.enQueue(19);
+
+		System.out.println("Queue empty: " + q.isEmpty());
+
+		if(q.isEmpty() == false) {
 			System.out.println("Deleting value from queue: " + q.deQueue() + "\n");
 
 			System.out.println("Adding value to queue: " + 27 + "\n");
 			q.enQueue(27);
 			q.display();
-		}*/
+		}
+
+		if (q.isEmpty() == true) {
+			System.out.println("Queue is empty bro");
+		} else {
+			System.out.println("Well shit, that didn't work...");
+		}
+
+		q.deQueue();
 	}
 } //end of Test class
 
