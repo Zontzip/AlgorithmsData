@@ -204,7 +204,7 @@ class GraphMatrix
 
         while(q.isEmpty() == false) {
             //System.out.println("Entered while loop, v: " + v);
-            q.display();
+            //q.display();
             v = q.deQueue();
             //System.out.println("v after deQueue: " + v);
 
@@ -220,17 +220,19 @@ class GraphMatrix
                                 " along edge: " + toChar(u) + " -- " + toChar(v));
                         }
                     }// end if
-
-
                 } // end for
             } // end if
+
+            for (int i = 1; i < V; i++) {
+                //System.out.println("visited[" + i + "]: " + visited[i]);
+            }
         } // end while
     }
 
     public static void main(String[] args) throws IOException
     {
-        int s = 1;
-        String fname = "graph.txt";               
+        int s = 7;
+        String fname = "graph2.txt";               
 
         GraphMatrix g = new GraphMatrix(fname);
        
