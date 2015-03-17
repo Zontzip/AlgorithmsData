@@ -183,6 +183,7 @@ class GraphMatrix
     	for (int u = 1; u <= V; ++u) {
             if (adj[v][u] != 0) {
                 if(visited[u] == 0) {
+                    System.out.println("dfVisit(" + u +")");
                     dfVisit(v, u);
                 }
             }
@@ -219,7 +220,7 @@ class GraphMatrix
     public static void main(String[] args) throws IOException
     {
         int s = 7;
-        String fname = "graph2.txt";               
+        String fname = "graph.txt";               
 
         GraphMatrix g = new GraphMatrix(fname);
        

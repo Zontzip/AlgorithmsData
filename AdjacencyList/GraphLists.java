@@ -69,16 +69,16 @@ class GraphLists {
             wgt = Integer.parseInt(parts[2]);
 
             Node t = new Node();
-            t.next = adj[u]; // assign your current node address of previous
+            t.next = adj[u]; // point next node field of new node to the previous node
             adj[u] = t; // start working with adj, not t! (They are same locations btw)
-            t.vert = v;
-            t.wgt = wgt;
+            adj[u].vert = v;
+            adj[u].wgt = wgt;
 
             Node t2 = new Node();
             t2.next = adj[v]; 
             adj[v] = t2;
-            t2.vert = u;
-            t2.wgt = wgt;
+            adj[v].vert = u;
+            adj[v].wgt = wgt;
         }
     }
    
@@ -95,12 +95,12 @@ class GraphLists {
         
         for(v=1; v<=V; ++v) {
 
-            System.out.print("\nadj[" + toChar(v) + "] ->" );
+            System.out.print("\nadj[" + v + "] ->" );
 
             for(n = adj[v]; n != sentinel; n = n.next) {
-                System.out.print(" |" + toChar(n.vert) + " | " + n.wgt + "| ->");    
+                System.out.print(" |" + n.vert + " | " + n.wgt + "| ->");    
             }
-            System.out.print(" Sentinel break");
+            System.out.print(" Sentinel");
         }
         System.out.println("");
     }
@@ -108,60 +108,35 @@ class GraphLists {
     // method to initialise Depth First Traversal of Graph
     public void DF( int s) 
     {
-        int v;
         id = 0;
 
-        for (v = 1; v <= V; v++) {
+        for (int v = 1; v <= V; v++) { // initialise array, that's it
             visited[v] = 0;
         }
 
-        dfVisit(0, s);
+        dfVisit(0, s); // first call based on vertx passed in, prev is obviously 0 
     }
 
     // Recursive Depth First Traversal for adjacency lists
     private void dfVisit( int prev, int v)
     {
-        /*visited[v] = ++id;
-        System.out.println("Visited vertex: " + toChar(v) + " along edge: " + toChar(prev) + " -- " + toChar(v));
-
-        // recur for all adjacent vertexes
-        for (int u = 1; u <= V; ++u) {
-            for (Node t = adj[v]; t != sentinel; t = t.next) {
-                if(visited[v] == 0) {
-                    dfVisit(v, u);
-                }
-            }
-        }
-
-        for (int u = 1; u <= V; ++u) 
-        {
-            if (adj[id] != sentinel) 
-            {
-                if(visited[u] == 0) 
-                {
-                    dfVisit(v, u);
-                }
-            }
-        }*/
+        Node n;
 
         visited[v] = ++id;
         System.out.println("Depth First: Visited vertex: " + toChar(v) + " along edge: " + toChar(prev) + " -- " + toChar(v));
 
-        // traverse through vertexes
-        for (int u = 1; u <= V; ++u) {
-            if (adj[v][u] != 0) {
-                if(visited[u] == 0) {
-                    dfVisit(v, u);
-                }
+        for (n = adj[v]; n != sentinel; n = n.next) // go to all possible adjacent nodes
+        {
+            if(visited[n.vert] == 0) { // if node not visited, put on stack
+                dfVisit(v, n.vert); // pass u as next node
             }
         }
-
     }
 
     public static void main(String[] args) throws IOException
     {
         int s = 7;
-        String fname = "graph2.txt";               
+        String fname = "graph.txt";               
 
         GraphLists g = new GraphLists(fname);
        
