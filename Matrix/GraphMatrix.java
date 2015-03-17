@@ -1,8 +1,9 @@
-// Simple weighted graph representation 
-// Uses an Adjacency Matrix, suitable for dense graphs
-// Depth first search
-//
-// Name: Alex Kiernan
+/* Simple weighted graph representation that uses a matrix.
+ * Contains depth/breadth first search methods.
+ * 
+ * Name: Alex Kiernan
+ *
+ */
 
 import java.io.*;
 
@@ -36,18 +37,18 @@ class Queue {
     }
 
     public void enQueue(int x) {
-        Node newTail = new Node();
+        Node t = new Node();
 
-        newTail.data = x;
+        t.data = x;
 
         if (head == null) {
-            head = newTail;
-            tail = newTail;
+            head = t;
+            tail = t;
         } else {
-                // The new node becomes the new tail of the list.
-                // (The head of the list is unaffected.)
-             tail.next = newTail;
-             tail = newTail;
+            // The new node becomes the new tail of the list.
+            // (The head of the list is unaffected.)
+             tail.next = t;
+             tail = t;
         }
     }
 
@@ -67,7 +68,7 @@ class Queue {
     }
 
     public boolean isEmpty() {
-        return (head == tail);
+        return (tail == null);
     }
 
     public boolean isMember(int x) {
@@ -154,7 +155,7 @@ class GraphMatrix
         int u,v;
 
         for(v=1; v<=V; ++v) {
-            System.out.print("\nadj[" + v + "] = ");
+            System.out.print("\nadj[" + toChar(v) + "] = ");
             for(u=1; u<=V; ++u) 
                 System.out.print("  " + adj[u][v]);
         }    
@@ -183,14 +184,14 @@ class GraphMatrix
     	for (int u = 1; u <= V; ++u) {
             if (adj[v][u] != 0) {
                 if(visited[u] == 0) {
-                    System.out.println("dfVisit(" + u +")");
+                    //System.out.println("dfVisit(" + u +")");
                     dfVisit(v, u);
                 }
             }
         }
     }
 
-    /*public void BF(int s) {
+    public void BF(int s) {
         Queue q = new Queue();
         int v;
         id = 0;
@@ -201,32 +202,41 @@ class GraphMatrix
 
         q.enQueue(s);
 
-        while(! q.isEmpty()) {
+        while(q.isEmpty() == false) {
+            //System.out.println("Entered while loop, v: " + v);
+            q.display();
             v = q.deQueue();
-            if(visited[v] == 0) {
+            //System.out.println("v after deQueue: " + v);
+
+            if(visited[v] == 0) 
+            {
                 visited[v] = ++id;
 
                 for (int u = 1; u <= V; ++u) {
                     if (visited[u] == 0) {
-                        q.enQueue(u);
+                        if (adj[v][u] != 0) {
+                            q.enQueue(u);
+                            System.out.println("Breadth First: Visited vertex: " + toChar(v) + 
+                                " along edge: " + toChar(u) + " -- " + toChar(v));
+                        }
                     }// end if
-                    System.out.println("Breadth First: Visited vertex: " + toChar(v) + " along edge: " + toChar(u) + " -- " + toChar(v));
+
 
                 } // end for
             } // end if
         } // end while
-    }*/
+    }
 
     public static void main(String[] args) throws IOException
     {
-        int s = 7;
+        int s = 1;
         String fname = "graph.txt";               
 
         GraphMatrix g = new GraphMatrix(fname);
        
         g.display();
         
-        g.DF(s);
-        //g.BF;
+        //g.DF(s);
+        g.BF(s);
     }
 }
