@@ -226,13 +226,11 @@ class GraphLists {
             visited[v] = 0;
         }
 
-        q.enQueue(s);
+        q.enQueue(s); // enqueue our first vertex
 
         while(q.isEmpty() == false) {
-            //System.out.println("Entered while loop, v: " + v);
-            q.display();
+            //q.display();
             v = q.deQueue();
-            //System.out.println("v after deQueue: " + v);
 
             if(visited[v] == 0) 
             {
@@ -240,6 +238,8 @@ class GraphLists {
                 
                 for (n = adj[v]; n != sentinel; n = n.next) // go to all possible adjacent nodes
                 {
+                    //System.out.println("n.vert!!: " + n.vert);
+
                     if(visited[n.vert] == 0) { // if node not visited, put on queue
                         q.enQueue(n.vert);
                         System.out.println("Breadth First: Visited vertex: " + toChar(n.vert) + 
@@ -259,8 +259,8 @@ class GraphLists {
        
         g.display();
         
-        g.DF(s);
-        //g.BF(s);
+        //g.DF(s);
+        g.BF(s);
     }
 
 }
