@@ -242,11 +242,10 @@ class GraphLists {
 
                     if(visited[n.vert] == 0) { // if node not visited, put on queue
                         q.enQueue(n.vert);
-                        System.out.println("Breadth First: Visited vertex: " + toChar(n.vert) + 
-                            " along edge: " + toChar(v) + " -- " + toChar(n.vert));
                     }
                 } // end for 
             } // end if
+            System.out.println("Breadth First: Visited vertex: " + toChar(n.vert));
         } // end while
     }
 
