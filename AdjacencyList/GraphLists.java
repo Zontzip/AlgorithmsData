@@ -244,8 +244,8 @@ class GraphLists {
                         q.enQueue(n.vert);
                     }
                 } // end for 
+                System.out.println("Breadth First: Visited vertex: " + toChar(v));
             } // end if
-            System.out.println("Breadth First: Visited vertex: " + toChar(n.vert));
         } // end while
     }
 
@@ -258,7 +258,7 @@ class GraphLists {
        
         g.display();
         
-        //g.DF(s);
+        g.DF(s);
         g.BF(s);
     }
 
