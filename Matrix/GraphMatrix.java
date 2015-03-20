@@ -216,11 +216,10 @@ class GraphMatrix
                     if (visited[u] == 0) {
                         if (adj[v][u] != 0) {
                             q.enQueue(u);
-                            System.out.println("Breadth First: Visited vertex: " + toChar(v) + 
-                                " along edge: " + toChar(u) + " -- " + toChar(v));
                         }
                     }// end if
                 } // end for
+                System.out.println("Breadth First: Visited vertex: " + toChar(v));
             } // end if
 
             for (int i = 1; i < V; i++) {
@@ -238,7 +237,7 @@ class GraphMatrix
        
         g.display();
         
-        //g.DF(s);
+        g.DF(s);
         g.BF(s);
     }
 }
