@@ -46,7 +46,7 @@ class Heap
             //hPos[heap[k]] = k;
             k = k/2;					// update the position of the array index
             System.out.println("While loop k: " + k);
-            System.out.println("Value of heap[k]: " + heap[k]);
+            System.out.println("Value of heap[k]: " + heap[k] + "\n");
         }
 
         heap[k] = v; // now we store our number in the correct position
@@ -55,18 +55,31 @@ class Heap
 
     public void siftDown(int k)
     {
-        int v, j;
+        int v = heap[k];
+        int j = 2 * k;
 
-        heap = h[k];
+        while(j <= N/2) {
+        	j = 2 * k;
+            if(j < N && heap[j] < heap[j+1]) {
+            	++j;
+            }
+            if( v >= heap[j] ) {
+            	break;
+            }
 
-        while(heap <= k/2 ) {// while node at pos k has a left child node 
-            j = 2k
-            if( j < N ∧ h[j] < h[j+1]) ++j
-            if( v ≥ h[j] ) break
-            h[k] = h[j]; 
+            heap[k] = heap[j]; 
             k = j;
-            h[k] = v; 
-    }*/
+        }
+
+        heap[k] = v; 
+    }
+
+    public int remove() {
+    	heap[0] = heap[1];
+    	heap[1] = heap[N--];
+    	siftDown(1);
+    	return heap[0];
+    }
 
     public void display() 
     {
@@ -87,19 +100,30 @@ class heapTest
     {
         Heap h = new Heap();
 
-        Random r = new Random();
+        //Random r = new Random();
+        int nums[] = new int[10];
+        nums[1] = 8;
+        nums[2] = 6;
+        nums[3] = 5;
+        nums[4] = 2;
+        nums[5] = 3;
+        nums[6] = 1;
+        nums[7] = 4;
 
         int i, x;
-        for (i = 0; i < 10; ++i)
+        for (i = 1; i < 8; ++i)
         {
-            x = r.nextInt(99);
-            System.out.println("\nInserting " + x);
-            h.insert(x);
+            //x = r.nextInt(99);
+            System.out.println("\nInserting " + nums[i]);
+            h.insert(nums[i]);
             h.display();
         }
 
-        //x = h.remove();
-        //System.out.println("\nRemoving {0} ", x);
-        // h.display();
+        h.insert(7);
+        h.display();
+
+        x = h.remove();
+        System.out.println("\nRemoving {0} " + x);
+        h.display();
     }
 }
