@@ -1,8 +1,8 @@
 /* Heap implementation using an array
-   
-   Name: Alex Kiernan
-
-   Date: 2015-02-13
+ *  
+ * Name: Alex Kiernan
+ *
+ * Date: 2015-02-13
 */
 
 import java.util.*;
@@ -10,43 +10,31 @@ import java.util.*;
 class Heap
 {
     private int[] heap;     // heap is our heap array
+    private int[] hPos;		// hPos 
+    
     private int N;          // N is our global position in the heap array
-    private int[] hPos;
-
-    private static int hmax = 100;
+    private static int hMax = 100;
     
     public Heap()
     {
-        heap = new int[hmax + 1];
         N = 0;
-    }
-
-    public Heap(int _hmax)
-    {
-        heap = new int[_hmax + 1];
-        N = 0;
-    }
-
-    public void insert(int x)
-    {
-        heap[++N] = x; // N is the array position
-        System.out.println("N equals: " + N);
-        siftUp(N);
+        heap = new int[hMax + 1];
     }
   
     public void siftUp(int k)
     {
     	// v is the value we want to put in position. At this time it is a specified position (k) in the array.
         int v = heap[k];
-        heap[0] = Integer.MAX_VALUE;    // sets first element of heap to some unwritable, super large number
+
+        heap[0] = Integer.MAX_VALUE;    // sets first element to infinite
 
         // remember, this is a binary tree of numbers
         while(v > heap[k/2]) {          // while the our number is less than the value stored in heap index/2
             heap[k] = heap[k/2];        // replace what is in our current position with the smaller number
             //hPos[heap[k]] = k;
             k = k/2;					// update the position of the array index
-            System.out.println("While loop k: " + k);
-            System.out.println("Value of heap[k]: " + heap[k] + "\n");
+            //System.out.println("While loop k: " + k);
+            //System.out.println("Value of heap[k]: " + heap[k] + "\n");
         }
 
         heap[k] = v; // now we store our number in the correct position
@@ -56,14 +44,19 @@ class Heap
     public void siftDown(int k)
     {
         int v = heap[k];
-        int j = 2 * k;
+        int j;
 
-        while(j <= N/2) {
-        	j = 2 * k;
-            if(j < N && heap[j] < heap[j+1]) {
+        while(k <= N/2) 
+        {
+            j = k * 2;
+
+            // check if there is value in heap, then find branch
+            if(j <= N && heap[j] < heap[j+1]) {
             	++j;
             }
-            if( v >= heap[j] ) {
+
+            // compare node being sifted to position
+            if(v >= heap[j]) {
             	break;
             }
 
@@ -72,13 +65,22 @@ class Heap
         }
 
         heap[k] = v; 
+        //hPos[v] = k;
     }
 
-    public int remove() {
-    	heap[0] = heap[1];
+    public void insert(int x)
+    {
+        heap[++N] = x; // N is the array position
+        System.out.println("N equals: " + N);
+        siftUp(N);
+    }
+
+    public int remove() 
+    {
+    	int v = heap[1];
     	heap[1] = heap[N--];
     	siftDown(1);
-    	return heap[0];
+    	return v;
     }
 
     public void display() 
@@ -91,6 +93,12 @@ class Heap
                 System.out.println();
             }
         }
+    }
+
+    // check if heap is empty
+    public boolean isEmpty()
+    {
+        return N == 0;
     }
 }
 
@@ -123,7 +131,7 @@ class heapTest
         h.display();
 
         x = h.remove();
-        System.out.println("\nRemoving {0} " + x);
+        System.out.println("\nRemoving " + x);
         h.display();
     }
 }
