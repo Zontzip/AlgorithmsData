@@ -30,7 +30,7 @@ class Heap
         int v = heap[k];
 
         heap[0] = 0;
-        dist[0] = Integer.MIN_VALUE;  // sets first element of heap ti infinite
+        dist[0] = Integer.MIN_VALUE;  // sets first element of heap to infinite
 
         while (dist[v] < dist[heap[k/2]])
         {
@@ -191,7 +191,7 @@ class Graph
     // find MST using prims' algorithm
     int[] MST_Prim(int s)
     {
-        int v;
+        int vertex;
         int total_wgt = 0;
         int[] dist, parent, hPos;
         Node node;
@@ -205,7 +205,7 @@ class Graph
         hPos = new int[V + 1];
 
         // initialise hPos and parent to 0
-        for (v = 1; v <= V; v++)
+        for (int v = 1; v <= V; v++)
         {
             dist[v] = Integer.MAX_VALUE;
             parent[v] = 0;
@@ -220,28 +220,34 @@ class Graph
         while (!heap.isEmpty())
         {
 
-            v = heap.remove();
+            vertex = heap.remove();
+            //System.out.print("\nvertex: " + vertex);
+            //System.out.print("\nDist[vertex]: " + dist[vertex]);
 
-            System.out.print("\nSelected edge " + toChar(parent[v]) + "--[" + dist[v] + "]--" + toChar(v));
+            //System.out.print("\nSelected edge " + toChar(parent[vertex]) + "--[" + dist[vertex] + "]--" + toChar(vertex) + "\n");
 
             // total weight
-            total_wgt += dist[v];
+            total_wgt += dist[vertex];
+            System.out.println("Total weight: " + total_wgt);
 
-            // removes equal weights
-            dist[v] = -dist[v];
-
-            for (node = adj[v]; node != sentinel; node = node.next)
+            for (node = adj[vertex]; node != sentinel; node = node.next)
             {
+                //System.out.println("If node.data(" + node.data + ") < dist[node.vert](" + dist[node.vert] + ")");
                 if (node.data < dist[node.vert])
                 {
+                    //System.out.println("--dist[node.vert(" + node.vert + ")](" + dist[node.vert] + ") = node.data(" + node.data + ")");
                     dist[node.vert] = node.data;
-                    parent[node.vert] = v;
+                    //System.out.println("--parent[node.vert](" + parent[node.vert] + ") = vertex(" + vertex + ")");
+                    parent[node.vert] = vertex;
 
+                    //System.out.println("hPos[node.vert]: " + hPos[node.vert]);
                     // check if vertex is empty, if not: insert vertex
                     if (hPos[node.vert] == 0) {
+                        //System.out.println("Yes");
                         heap.insert(node.vert);
                     }
                     else {
+                        //System.out.println("No");
                         heap.siftUp(hPos[node.vert]);
                     }
                 }
@@ -268,10 +274,10 @@ class Graph
 public class PrimLists {
     public static void main(String[] args) throws IOException
     {
-        String fileName;
-        int vertex;
+        String fileName = "graph.txt";
+        int vertex = 4;
 
-        Scanner in = new Scanner(System.in);
+        /*Scanner in = new Scanner(System.in);
 
         System.out.print("\nEnter the name of a graph file: ");
         fileName = in.nextLine();
@@ -281,7 +287,7 @@ public class PrimLists {
         vertex = in.nextInt();
         System.out.print("\nVertex: " + vertex + "\n");
 
-        in.close();
+        in.close();*/
 
         Graph g = new Graph(fileName);
        
