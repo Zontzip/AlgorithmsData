@@ -274,10 +274,10 @@ class Graph
 public class PrimLists {
     public static void main(String[] args) throws IOException
     {
-        String fileName = "graph.txt";
-        int vertex = 4;
+        String fileName;
+        int vertex;
 
-        /*Scanner in = new Scanner(System.in);
+        Scanner in = new Scanner(System.in);
 
         System.out.print("\nEnter the name of a graph file: ");
         fileName = in.nextLine();
@@ -287,7 +287,7 @@ public class PrimLists {
         vertex = in.nextInt();
         System.out.print("\nVertex: " + vertex + "\n");
 
-        in.close();*/
+        in.close();
 
         Graph g = new Graph(fileName);
        
